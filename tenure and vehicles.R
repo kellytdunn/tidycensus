@@ -10,7 +10,7 @@ library(tidycensus)
 getwd()
 setwd('H:/dashboards - working copy/R Code')
 
-
+# key = (get your own free API key from https://api.census.gov/data/key_signup.html)
 current_year = format(Sys.Date(), "%Y") #define current year
 years = seq.int(2019, current_year, by = 1) #list all years from 2019 to present
 data = data.frame() #create empty dataframe to dump data into
@@ -19,7 +19,7 @@ data = data.frame() #create empty dataframe to dump data into
 #for every year in the list, run the census API call and add it to the empty dataframe. 
 
 for(i in years){
-  df = get_acs(geography = "tract", table = "B25044", cache_table = TRUE, year = i, state = 53, county = c(33, 61, 53), key = '2eb74e928c52482f6acbc1d75f4c2a7d066f0d44') #call API
+  df = get_acs(geography = "tract", table = "B25044", cache_table = TRUE, year = i, state = 53, county = c(33, 61, 53), key = key) #call API
   df$Year = i #add year column
   try((data = rbind(data, df)), silent = TRUE) #add to larger dataframe. ignore years where data doesn't yet exist. 
 }
