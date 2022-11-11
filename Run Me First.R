@@ -1,0 +1,1 @@
+install.packages("writexl", "tidycensus", "janitor", "lehdr")
