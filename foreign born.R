@@ -9,11 +9,12 @@ current_year = format(Sys.Date(), "%Y") #define current year
 years = seq.int(2019, current_year, by = 1) #list all years from 2019 to present
 data = data.frame() #create empty dataframe to dump data into
 
+# key = (get your own free API key from https://api.census.gov/data/key_signup.html)
 
 #for every year in the sequence, run the census API call and add it to the empty dataframe. Ignores years where data does not yet exist. You can ignore "API endpoint not found" errors
 
 for(i in years){
-  df = get_acs(geography = "tract", table = "B05006", cache_table = TRUE, year = i, state = 53, county = c(33, 61, 53), key = '2eb74e928c52482f6acbc1d75f4c2a7d066f0d44')
+  df = get_acs(geography = "tract", table = "B05006", cache_table = TRUE, year = i, state = 53, county = c(33, 61, 53), key = key)
   df$Year = i
   try((data = rbind(data, df)), silent = TRUE)
 }
